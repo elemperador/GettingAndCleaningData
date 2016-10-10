@@ -18,7 +18,7 @@ testSetY <- read.table("./UCI HAR Dataset/test/y_test.txt")
 subjectTest <- read.table("./UCI HAR Dataset/test/subject_test.txt")
 
 testSetY[,2] <- labels[testSetY[,1]]
-names(testSetY) <- c("ID", "Name")
+names(testSetY) <- c("Activity_ID", "Activity_Name")
 names(subjectTest) <- "subject"
 
 trainSetX <- read.table("./UCI HAR Dataset/train/X_train.txt")
@@ -26,7 +26,7 @@ trainSetY <- read.table("./UCI HAR Dataset/train/y_train.txt")
 subjectTrain <- read.table("./UCI HAR Dataset/train/subject_train.txt")
 
 trainSetY[,2] = labels[trainSetY[,1]]
-names(trainSetY) = c("ID", "Name")
+names(trainSetY) = c("Activity_ID", "Activity_Name")
 names(subjectTrain) = "subject"
 
 # Name sets
@@ -46,5 +46,6 @@ mergedData <- rbind(cbind(subjectTest, testSetY, testSetX),
 dataDplr <- tbl_df(mergedData)
 
 # Calculate Means and store in indepedent tidy dataset
-tidyDataSet <- dataDplr %>% group_by(Name) %>% summarise_each(funs(mean))
+tidyDataSet <- dataDplr %>% group_by(Activity_Name) %>% summarise_each(funs(mean))
 
+write.table(tidyDataSet, file = "./tidyDataSet.txt")
