@@ -48,4 +48,4 @@ dataDplr <- tbl_df(mergedData)
 # Calculate Means and store in indepedent tidy dataset
 tidyDataSet <- dataDplr %>% group_by(Activity_Name) %>% summarise_each(funs(mean))
 
-write.table(tidyDataSet, file = "./tidyDataSet.txt")
+write.table(tidyDataSet, file = "./tidyDataSet.txt", row.name=FALSE)
